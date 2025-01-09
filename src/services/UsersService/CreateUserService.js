@@ -1,7 +1,6 @@
-const User = require("../../models/User");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-
+import User from "../../models/User.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 const CreateUserService = async (dataUser) => {
   try {
     // Validar se existe o email
@@ -46,4 +45,5 @@ const CreateUserService = async (dataUser) => {
   }
 };
 
-module.exports = CreateUserService;
+export default CreateUserService;
+// module.exports = CreateUserService;

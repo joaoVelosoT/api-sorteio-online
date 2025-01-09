@@ -1,12 +1,19 @@
-require("dotenv").config();
-const express = require("express");
-const database = require("./config/database");
+// require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
+
+// const express = require("express");
+import express from "express";
+// const database = require("./config/database");
+import database from "./config/database.js";
 const app = express();
 const port = process.env.PORT || 8020;
-const router = require("./routers/router");
-const swaggerUI = require("swagger-ui-express");
-const swaggerDocs = require("../swagger.json");
-
+// const router = require("./routers/router");
+import router from "./routers/router.js";
+// const swaggerUI = require("swagger-ui-express");
+import swaggerUI from "swagger-ui-express";
+// const swaggerDocs = require("../swagger.json");
+import swaggerDocs from "../swagger.json" assert { type: "json" };
 app.use(express.json());
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use("/", router);

@@ -39,6 +39,90 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "summary": "Listagem de usuarios",
+        "description": "Essa rota será responsavel por buscar todos os usuarios",
+        "tags": ["User"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "get": {
+        "summary": "Busca de usuario por id",
+        "description": "Essa rota será responsavel por busca um usuario por id",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuario para buscar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update de usuario",
+        "description": "Essa rota será responsavel por atualizar usuario",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do usuario para buscar e atualizar",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "João Vitor",
+                    "email": "emailteste@gmail.com",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar usuario",
+        "description": "Essa rota será responsavel por busca um usuario por id e deletar",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuario para buscar e deletar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },

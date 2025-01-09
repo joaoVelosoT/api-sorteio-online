@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const { UnknownConstraintError } = require("sequelize");
+// const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const connectDatabase = async () => {
   try {
@@ -14,4 +14,5 @@ const connectDatabase = async () => {
   }
 };
 
-module.exports = connectDatabase;
+export default connectDatabase;
+// module.exports = connectDatabase;

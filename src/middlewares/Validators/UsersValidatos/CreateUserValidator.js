@@ -47,5 +47,4 @@ const CreateUserValidator = (req, res, next) => {
   }
 };
 
-
-module.exports = CreateUserValidator
+export default CreateUserValidator;
