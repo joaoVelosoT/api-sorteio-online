@@ -1,29 +1,33 @@
 // const { Router } = require("express");
 import { Router } from "express";
-import CreateUserValidator from "../middlewares/Validators/UsersValidatos/CreateUserValidator.js";
-import CreateUserController from "../controllers/UsersController/CreateUserController.js";
-import GetAllUserController from "../controllers/UsersController/GetAllUserController.js";
-import GetOneUserController from "../controllers/UsersController/GetOneUserController.js";
+
 import ValidatorID from "../middlewares/Validators/ValidatorID.js";
-import UpdateUserController from "../controllers/UsersController/UpdateUserController.js";
-import UpdateUserValidator from "../middlewares/Validators/UsersValidatos/UpdateUserValidator.js";
-import DeleteUserController from "../controllers/UsersController/DeleteUserController.js";
+import UserCreateController from "../controllers/UsersController/UserCreateController.js";
+import UserGetAllController from "../controllers/UsersController/UserGetAllController.js";
+import UserGetOneController from "../controllers/UsersController/UserGetOneController.js";
+
+import UserUpdateController from "../controllers/UsersController/UserUpdateController.js";
+import UserDeleteController from "../controllers/UsersController/UserDeleteController.js";
+import UserCreateValidator from "../middlewares/Validators/UsersValidatos/UserCreateValidator.js";
+import UserUpdateValidator from "../middlewares/Validators/UsersValidatos/UserUpdateValidator.js";
 
 const router = Router();
 
 // Cadastrar usuarios
-router.post("/", CreateUserValidator, CreateUserController);
+router.post("/", UserCreateValidator, UserCreateController);
 
 // Listar usuarios
-router.get("/", GetAllUserController);
+router.get("/", UserGetAllController);
 
 // Listar usuario por id
-router.get("/:id", ValidatorID, GetOneUserController);
+router.get("/:id", ValidatorID, UserGetOneController);
 
 // Atualizar usuario
-router.put("/:id", ValidatorID, UpdateUserValidator, UpdateUserController);
+router.put("/:id", ValidatorID, UserUpdateValidator, UserUpdateController);
 
 // Deletar usuario
-router.delete("/:id", ValidatorID, DeleteUserController);
+router.delete("/:id", ValidatorID, UserDeleteController);
+
+// Logar usuario
 
 export default router;

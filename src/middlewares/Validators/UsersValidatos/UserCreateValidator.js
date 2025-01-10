@@ -1,4 +1,4 @@
-const CreateUserValidator = (req, res, next) => {
+const UserCreateValidator = (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -47,4 +47,4 @@ const CreateUserValidator = (req, res, next) => {
   }
 };
 
-export default CreateUserValidator;
+export default UserCreateValidator;

@@ -1,10 +1,10 @@
+// const { default: User } = require("../../models/User");
+
 import User from "../../models/User.js";
 
-const DeleteUserService = async (_id) => {
+const UserGetOneService = async (_idUser) => {
   try {
-    // Validar se existe o usuario
-    const user = await User.findById(_id);
-
+    const user = await User.findById(_idUser);
     if (!user) {
       return {
         code: 404,
@@ -14,12 +14,9 @@ const DeleteUserService = async (_id) => {
       };
     }
 
-    // Deletar usuario
-    await user.deleteOne();
-
     return {
       code: 200,
-      message: "Usuario deletado com sucesso",
+      message: "Usuario encontrado",
       user,
     };
   } catch (error) {
@@ -28,4 +25,4 @@ const DeleteUserService = async (_id) => {
   }
 };
 
-export default DeleteUserService
+export default UserGetOneService;

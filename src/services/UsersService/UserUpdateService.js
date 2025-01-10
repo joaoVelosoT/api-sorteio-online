@@ -1,6 +1,6 @@
 import User from "../../models/User.js";
 import bcrypt from "bcryptjs";
-const UpdateUserService = async (_id, dataUser) => {
+const UserUpdateService = async (_id, dataUser) => {
   try {
     // Validar se existe esse usuario
     const user = await User.findById(_id);
@@ -58,4 +58,4 @@ const UpdateUserService = async (_id, dataUser) => {
   }
 };
 
-export default UpdateUserService;
+export default UserUpdateService;

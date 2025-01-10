@@ -11,6 +11,65 @@
     }
   ],
   "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Registro de Usuarios",
+        "description": "Essa rota será responsavel pelo registro de usuario, devolvendo ja o token de autenticação",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "João Vitor",
+                    "email": "emailteste@gmail.com",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login de Usuario",
+        "description": "Essa rota será responsavel pelo login de usuario",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "email": "emailteste@gmail.com",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "summary": "Cadastro de usuarios",

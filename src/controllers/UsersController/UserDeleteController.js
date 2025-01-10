@@ -1,8 +1,10 @@
-import CreateUserService from "../../services/UsersService/CreateUserService.js"
+import UserDeleteService from "../../services/UsersService/UserDeleteService.js";
 
-const CreateUserController = async (req, res) => {
+
+const UserDeleteController = async (req, res) => {
   try {
-    const user = await CreateUserService(req.user);
+    const user = await UserDeleteService(req.params.id);
+
     if (user.error) {
       return res.status(user.code).json({
         code: user.code,
@@ -28,5 +30,4 @@ const CreateUserController = async (req, res) => {
   }
 };
 
-export default CreateUserController;
-// module.exports = CreateUserController;
+export default UserDeleteController;

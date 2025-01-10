@@ -1,4 +1,4 @@
-const UpdateUserValidator = (req, res, next) => {
+const UserUpdateValidator = (req, res, next) => {
   try {
     const { name, email, password } = req.body;
 
@@ -22,4 +22,4 @@ const UpdateUserValidator = (req, res, next) => {
   }
 };
 
-export default UpdateUserValidator;
+export default UserUpdateValidator;

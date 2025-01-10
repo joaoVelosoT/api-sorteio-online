@@ -1,9 +1,8 @@
-import DeleteUserService from "../../services/UsersService/DeleteUserService.js";
+import UserGetOneService from "../../services/UsersService/UserGetOneService.js";
 
-const DeleteUserController = async (req, res) => {
+const UserGetOneController = async (req, res) => {
   try {
-    const user = await DeleteUserService(req.params.id);
-
+    const user = await UserGetOneService(req.params.id);
     if (user.error) {
       return res.status(user.code).json({
         code: user.code,
@@ -29,4 +28,4 @@ const DeleteUserController = async (req, res) => {
   }
 };
 
-export default DeleteUserController;
+export default UserGetOneController;

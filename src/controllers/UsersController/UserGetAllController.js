@@ -1,8 +1,8 @@
-import GetAllUserService from "../../services/UsersService/GetAllUserService.js";
+import UserGetAllService from "../../services/UsersService/UserGetAllService.js";
 
-const GetAllUserController = async (req, res) => {
+const UserGetAllController = async (req, res) => {
   try {
-    const users = await GetAllUserService();
+    const users = await UserGetAllService();
     if (users.error) {
       return res.status(users.code).json({
         code: users.code,
@@ -28,5 +28,5 @@ const GetAllUserController = async (req, res) => {
   }
 };
 
-export default GetAllUserController;
+export default UserGetAllController;
 // module.exports = GetAllUserController;

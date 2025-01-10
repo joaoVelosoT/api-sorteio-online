@@ -1,8 +1,8 @@
-import UpdateUserService from "../../services/UsersService/UpdateUserService.js";
+import UserUpdateService from "../../services/UsersService/UserUpdateService.js";
 
-const UpdateUserController = async (req, res) => {
+const UserUpdateController = async (req, res) => {
   try {
-    const user = await UpdateUserService(req.params.id, req.user);
+    const user = await UserUpdateService(req.params.id, req.user);
     if (user.error) {
       return res.status(user.code).json({
         code: user.code,
@@ -28,4 +28,4 @@ const UpdateUserController = async (req, res) => {
   }
 };
 
-export default UpdateUserController;
+export default UserUpdateController;

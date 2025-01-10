@@ -1,8 +1,9 @@
-import GetOneUserService from "../../services/UsersService/GetOneUserService.js";
+import UserCreateService from "../../services/UsersService/UserCreateService.js";
 
-const GetOneUserController = async (req, res) => {
+
+const UserCreateController = async (req, res) => {
   try {
-    const user = await GetOneUserService(req.params.id);
+    const user = await UserCreateService(req.user);
     if (user.error) {
       return res.status(user.code).json({
         code: user.code,
@@ -28,4 +29,5 @@ const GetOneUserController = async (req, res) => {
   }
 };
 
-export default GetOneUserController;
+export default UserCreateController;
+// module.exports = CreateUserController;
