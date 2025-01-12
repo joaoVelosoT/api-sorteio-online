@@ -183,6 +183,35 @@
           }
         }
       }
+    },
+    "/admins": {
+      "post": {
+        "summary": "Cadastro de admins",
+        "description": "Essa rota será responsavel pelo cadastro de admins",
+        "tags": ["Admin"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              },
+              "examples": {
+                "admin": {
+                  "value": {
+                    "name": "João Vitor",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -197,6 +226,20 @@
             "type": "string"
           },
           "email": {
+            "type": "string"
+          }
+        }
+      },
+      "Admin": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "registration": {
+            "type": "string"
+          },
+          "password": {
             "type": "string"
           }
         }
