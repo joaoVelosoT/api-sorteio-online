@@ -6,7 +6,7 @@ const IsMongoID = (_id) => {
       };
     }
 
-    if (_id < 24 || _id > 25) {
+    if (_id.length < 24 || _id.length > 25) {
       return {
         error: "O id enviado precisa ser um MongoID",
       };

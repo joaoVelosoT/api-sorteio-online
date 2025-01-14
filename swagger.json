@@ -222,6 +222,80 @@
           }
         }
       }
+    },
+    "/admins/{id}": {
+      "get": {
+        "summary": "Busca de admin por id",
+        "description": "Essa rota será responsavel por busca um admin por id",
+        "tags": ["Admin"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do admin para buscar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "summary": "Update de usuario",
+        "description": "Essa rota será responsavel por atualizar usuario",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id do usuario para buscar e atualizar",
+            "required": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "João Vitor",
+                    "email": "emailteste@gmail.com",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deletar usuario",
+        "description": "Essa rota será responsavel por busca um usuario por id e deletar",
+        "tags": ["User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do usuario para buscar e deletar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
