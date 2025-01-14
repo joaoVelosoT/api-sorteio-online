@@ -211,6 +211,16 @@
             "description": "OK"
           }
         }
+      },
+      "get": {
+        "summary": "Listagem de admins",
+        "description": "Essa rota será responsavel por buscar os admins",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },
