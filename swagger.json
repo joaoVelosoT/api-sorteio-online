@@ -243,14 +243,14 @@
         }
       },
       "put": {
-        "summary": "Update de usuario",
-        "description": "Essa rota será responsavel por atualizar usuario",
-        "tags": ["User"],
+        "summary": "Update de admin",
+        "description": "Essa rota será responsavel por atualizar um admin",
+        "tags": ["Admin"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "id do usuario para buscar e atualizar",
+            "description": "id do admin para buscar e atualizar",
             "required": true
           }
         ],
@@ -258,13 +258,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/User"
+                "$ref": "#/components/schemas/Admin"
               },
               "examples": {
-                "user": {
+                "admin": {
                   "value": {
-                    "name": "João Vitor",
-                    "email": "emailteste@gmail.com",
+                    "name": "João Vitor teste",
                     "password": "senhateste123"
                   }
                 }
@@ -279,14 +278,14 @@
         }
       },
       "delete": {
-        "summary": "Deletar usuario",
-        "description": "Essa rota será responsavel por busca um usuario por id e deletar",
-        "tags": ["User"],
+        "summary": "Deletar admin",
+        "description": "Essa rota será responsavel por busca um admin por id e deletar",
+        "tags": ["Admin"],
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Id do usuario para buscar e deletar",
+            "description": "Id do admin para buscar e deletar",
             "required": true
           }
         ],
