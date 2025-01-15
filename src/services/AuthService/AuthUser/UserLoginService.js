@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import User from "../../models/User.js";
+import User from "../../../models/User.js";
 import jwt from "jsonwebtoken";
 const UserLoginService = async (dataUser) => {
   try {
@@ -33,6 +33,7 @@ const UserLoginService = async (dataUser) => {
         name: user.name,
         email: user.email,
         _id: user._id,
+        isAdmin : false
       },
       process.env.SECRET
     );

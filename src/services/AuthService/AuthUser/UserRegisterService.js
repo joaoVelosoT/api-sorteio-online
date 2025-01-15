@@ -1,7 +1,7 @@
-import User from "../../models/User.js";
+import User from "../../../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import UserCreateService from "../UsersService/UserCreateService.js";
+import UserCreateService from "../../UsersService/UserCreateService.js";
 const UserRegisterService = async (dataRegister) => {
   try {
     // Criptografando a senha do usuario
@@ -20,6 +20,7 @@ const UserRegisterService = async (dataRegister) => {
         name: user.name,
         _id: user._id,
         email: user.email,
+        isAdmin : false
       },
       process.env.SECRET
     );

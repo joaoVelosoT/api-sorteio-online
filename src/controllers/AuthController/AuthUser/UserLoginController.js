@@ -1,4 +1,5 @@
-import UserLoginService from "../../services/AuthService/UserLoginService.js";
+import UserLoginService from "../../../services/AuthService/AuthUser/UserLoginService.js";
+
 
 const UserLoginController = async (req, res) => {
   try {

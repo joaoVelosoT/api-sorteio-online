@@ -70,6 +70,35 @@
         }
       }
     },
+    "/auth/register/admin": {
+      "post": {
+        "summary": "Registro de admin",
+        "description": "Essa rota será responsavel pelo cadastro de admins",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              },
+              "examples": {
+                "admin": {
+                  "value": {
+                    "name": "João Vitor",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "summary": "Cadastro de usuarios",
@@ -327,6 +356,18 @@
           }
         }
       }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ]
 }

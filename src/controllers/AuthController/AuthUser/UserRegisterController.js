@@ -1,4 +1,5 @@
-import UserRegisterService from "../../services/AuthService/UserRegisterService.js";
+import UserRegisterService from "../../../services/AuthService/AuthUser/UserRegisterService.js";
+
 
 const UserRegisterController = async (req, res) => {
   try {
