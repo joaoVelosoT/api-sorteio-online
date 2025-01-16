@@ -2,6 +2,17 @@ import UserGetOneService from "../../services/UsersService/UserGetOneService.js"
 
 const UserGetOneController = async (req, res) => {
   try {
+    
+    if (!req.dataAuth.isAdmin && req.params.id !== req.dataAuth._id) {
+      return res.status(401).json({
+        code: 401,
+        error: {
+          message: "Não autorizado",
+        },
+      });
+    }
+    // req.dataAuth
+
     const user = await UserGetOneService(req.params.id);
     if (user.error) {
       return res.status(user.code).json({

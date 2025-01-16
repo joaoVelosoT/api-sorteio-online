@@ -1,12 +1,12 @@
-const LoginValidator = (req, res, next) => {
+const LoginAdminValidator = (req, res, next) => {
   try {
-    const { email, password, registration } = req.body;
+    const { registration, password } = req.body;
 
-    if (!email) {
+    if (!registration) {
       return res.status(400).json({
         code: 400,
         error: {
-          details: "O 'email' e obrigatorio",
+          details: "O 'registration' e obrigatorio",
         },
       });
     }
@@ -21,7 +21,7 @@ const LoginValidator = (req, res, next) => {
     }
 
     req.dataLogin = {
-      email,
+      registration,
       password,
     };
 
@@ -37,4 +37,4 @@ const LoginValidator = (req, res, next) => {
   }
 };
 
-export default LoginValidator;
+export default LoginAdminValidator;

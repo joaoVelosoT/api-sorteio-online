@@ -99,6 +99,35 @@
         }
       }
     },
+    "/auth/login/admin": {
+      "post": {
+        "summary": "Login de Admins",
+        "description": "Essa rota será responsavel pelo login de admins",
+        "tags": ["Auth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Admin"
+              },
+              "examples": {
+                "admin": {
+                  "value": {
+                    "registration": "1898679",
+                    "password": "senhateste123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/users": {
       "post": {
         "summary": "Cadastro de usuarios",

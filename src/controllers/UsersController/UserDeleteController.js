@@ -1,8 +1,16 @@
 import UserDeleteService from "../../services/UsersService/UserDeleteService.js";
 
-
 const UserDeleteController = async (req, res) => {
   try {
+    if (!req.dataAuth.isAdmin && req.params.id !== req.dataAuth._id) {
+      return res.status(401).json({
+        code: 401,
+        error: {
+          message: "Não autorizado",
+        },
+      });
+    }
+
     const user = await UserDeleteService(req.params.id);
 
     if (user.error) {

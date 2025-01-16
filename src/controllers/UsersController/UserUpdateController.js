@@ -2,6 +2,15 @@ import UserUpdateService from "../../services/UsersService/UserUpdateService.js"
 
 const UserUpdateController = async (req, res) => {
   try {
+    if (!req.dataAuth.isAdmin && req.params.id !== req.dataAuth._id) {
+      return res.status(401).json({
+        code: 401,
+        error: {
+          message: "Não autorizado",
+        },
+      });
+    }
+
     const user = await UserUpdateService(req.params.id, req.user);
     if (user.error) {
       return res.status(user.code).json({

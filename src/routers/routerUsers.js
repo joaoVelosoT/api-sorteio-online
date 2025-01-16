@@ -10,24 +10,30 @@ import UserUpdateController from "../controllers/UsersController/UserUpdateContr
 import UserDeleteController from "../controllers/UsersController/UserDeleteController.js";
 import UserCreateValidator from "../middlewares/Validators/UsersValidatos/UserCreateValidator.js";
 import UserUpdateValidator from "../middlewares/Validators/UsersValidatos/UserUpdateValidator.js";
+import TokenAuthenticator from "../middlewares/Validators/TokenAuthenticator.js";
 
 const router = Router();
 
 // Cadastrar usuarios
 router.post("/", UserCreateValidator, UserCreateController);
 
-// Listar usuarios
-router.get("/", UserGetAllController);
+// Listar usuarios // Rota protegida apenas para admins
+router.get("/", TokenAuthenticator, UserGetAllController);
 
-// Listar usuario por id
-router.get("/:id", ValidatorID, UserGetOneController);
+// Listar usuario por id / Rota protegida
+// apenas para admins e para o usuario logado buscar seus propios dados
+router.get("/:id", TokenAuthenticator, ValidatorID, UserGetOneController);
 
 // Atualizar usuario
-router.put("/:id", ValidatorID, UserUpdateValidator, UserUpdateController);
+router.put(
+  "/:id",
+  TokenAuthenticator,
+  ValidatorID,
+  UserUpdateValidator,
+  UserUpdateController
+);
 
 // Deletar usuario
-router.delete("/:id", ValidatorID, UserDeleteController);
-
-// Logar usuario
+router.delete("/:id", TokenAuthenticator, ValidatorID, UserDeleteController);
 
 export default router;

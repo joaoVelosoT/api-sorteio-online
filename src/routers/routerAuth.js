@@ -7,6 +7,8 @@ import LoginValidator from "../middlewares/Validators/AuthValidatos/LoginValidat
 import TokenAuthenticator from "../middlewares/Validators/TokenAuthenticator.js";
 import AdminRegisterController from "../controllers/AuthController/AuthAdmin/AdminRegisterController.js";
 import AdminCreateValidator from "../middlewares/Validators/AdminsValidatos/AdminCreateValidator.js";
+import LoginAdminValidator from "../middlewares/Validators/AuthValidatos/LoginAdminValidator.js";
+import AdminLoginController from "../controllers/AuthController/AuthAdmin/AdminLoginController.js";
 const router = Router();
 
 // Rotas para usuarios comuns
@@ -20,5 +22,7 @@ router.post(
   AdminCreateValidator,
   AdminRegisterController
 );
+
+router.post("/login/admin", LoginAdminValidator, AdminLoginController);
 
 export default router;
