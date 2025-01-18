@@ -2,6 +2,20 @@ import AdminGetOneService from "../../services/AdminsService/AdminGetOneService.
 
 const AdminGetOneController = async (req, res) => {
   try {
+
+    // Validar se o usuario logado e um admin_master ou e o propio admin
+    if (
+      req.dataAuth.role !== "admin_master" &&
+      req.params.id !== req.dataAuth._id
+    ) {
+      return res.status(401).json({
+        code: 401,
+        error: {
+          details: "Não autorizado",
+        },
+      });
+    }
+
     const admin = await AdminGetOneService(req.params.id);
     if (admin.error) {
       return res.status(admin.code).json({

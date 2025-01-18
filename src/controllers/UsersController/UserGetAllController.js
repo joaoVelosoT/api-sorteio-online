@@ -3,7 +3,7 @@ import UserGetAllService from "../../services/UsersService/UserGetAllService.js"
 const UserGetAllController = async (req, res) => {
   try {
     // Validando se o usuario logado e um admin
-    if (!req.dataAuth.isAdmin) {
+    if (req.dataAuth.role !== "admin") {
       return res.status(401).json({
         code: 401,
         error: {

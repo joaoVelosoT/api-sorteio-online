@@ -3,7 +3,7 @@ import UserGetOneService from "../../services/UsersService/UserGetOneService.js"
 const UserGetOneController = async (req, res) => {
   try {
     
-    if (!req.dataAuth.isAdmin && req.params.id !== req.dataAuth._id) {
+    if (req.dataAuth.role !== "admin" && req.params.id !== req.dataAuth._id) {
       return res.status(401).json({
         code: 401,
         error: {

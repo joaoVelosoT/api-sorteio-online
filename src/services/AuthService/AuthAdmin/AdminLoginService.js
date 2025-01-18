@@ -35,7 +35,7 @@ const AdminLoginService = async (dataAdmin) => {
         _id: admin._id,
         name: admin._name,
         registration: admin.registration,
-        isAdmin: true,
+        role: admin.role,
       },
       process.env.SECRET
     );

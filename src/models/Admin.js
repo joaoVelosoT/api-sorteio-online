@@ -11,6 +11,12 @@ const schemaAdmin = new Schema({
     required: true,
     unique: true,
   },
+  role: {
+    type: "String",
+    required: true,
+    enum: ["admin", "admin_master"],
+    default: "admin",
+  },
   password: {
     type: "String",
     required: true,

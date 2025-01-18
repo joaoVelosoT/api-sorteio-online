@@ -1,11 +1,9 @@
 // const { Router } = require("express");
 import { Router } from "express";
-
 import ValidatorID from "../middlewares/Validators/ValidatorID.js";
 import UserCreateController from "../controllers/UsersController/UserCreateController.js";
 import UserGetAllController from "../controllers/UsersController/UserGetAllController.js";
 import UserGetOneController from "../controllers/UsersController/UserGetOneController.js";
-
 import UserUpdateController from "../controllers/UsersController/UserUpdateController.js";
 import UserDeleteController from "../controllers/UsersController/UserDeleteController.js";
 import UserCreateValidator from "../middlewares/Validators/UsersValidatos/UserCreateValidator.js";
@@ -25,6 +23,8 @@ router.get("/", TokenAuthenticator, UserGetAllController);
 router.get("/:id", TokenAuthenticator, ValidatorID, UserGetOneController);
 
 // Atualizar usuario
+// Rota protegida
+// apenas para admins e para o usuario logado buscar seus propios dados
 router.put(
   "/:id",
   TokenAuthenticator,
@@ -34,6 +34,8 @@ router.put(
 );
 
 // Deletar usuario
+// Rota protegida
+// apenas para admins e para o usuario logado buscar seus propios dados
 router.delete("/:id", TokenAuthenticator, ValidatorID, UserDeleteController);
 
 export default router;

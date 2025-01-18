@@ -2,6 +2,16 @@ import AdminGetAllService from "../../services/AdminsService/AdminGetAllService.
 
 const AdminGetAllController = async (req, res) => {
   try {
+    // Validar se a pessoa authenticada e um admin_master
+    if (req.dataAuth.role !== "admin_master") {
+      return res.status(401).json({
+        code: 401,
+        error: {
+          message: "Não autorizado",
+        },
+      });
+    }
+
     const admins = await AdminGetAllService();
     if (admins.error) {
       return res.status(admins.code).json({

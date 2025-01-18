@@ -1,6 +1,6 @@
 const AdminCreateValidator = async (req, res, next) => {
   try {
-    const { name, password } = req.body;
+    const { name, password, role } = req.body;
 
     if (!name) {
       return res.status(400).json({
@@ -20,8 +20,21 @@ const AdminCreateValidator = async (req, res, next) => {
       });
     }
 
+    const roles = ["admin", "admin_master"];
+    if (role) {
+      if (!roles.includes(role)) {
+        return res.status(400).json({
+          code: 400,
+          error: {
+            details: `'${role}' não e um role válido`,
+          },
+        });
+      }
+    }
+
     req.admin = {
       name,
+      role,
       password,
     };
 

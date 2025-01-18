@@ -2,8 +2,8 @@ import AdminRegisterService from "../../../services/AuthService/AuthAdmin/AdminR
 
 const AdminRegisterController = async (req, res) => {
   try {
-    // Validar se a pessoa authenticada e um admin
-    if (!req.dataAuth.isAdmin) {
+    // Validar se a pessoa authenticada e um admin_master
+    if (req.dataAuth.role !== "admin_master") {
       return res.status(401).json({
         code: 401,
         error: {
@@ -11,9 +11,17 @@ const AdminRegisterController = async (req, res) => {
         },
       });
     }
-    console.log(req.dataAuth);
+
 
     const admin = await AdminRegisterService(req.admin);
+    if (admin.error) {
+      return res.status(admin.code).json({
+        code: admin.code,
+        error: {
+          details: admin.error.message,
+        },
+      });
+    }
 
     return res.status(admin.code).json({
       code: admin.code,

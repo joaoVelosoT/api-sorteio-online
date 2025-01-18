@@ -1,6 +1,6 @@
 const LoginAdminValidator = (req, res, next) => {
   try {
-    const { registration, password } = req.body;
+    const { registration, password} = req.body;
 
     if (!registration) {
       return res.status(400).json({

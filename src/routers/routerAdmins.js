@@ -7,21 +7,38 @@ import AdminGetOneController from "../controllers/AdminsController/AdminGetOneCo
 import AdminUpdateValidator from "../middlewares/Validators/AdminsValidatos/AdminUpdateValidator.js";
 import AdminUpdateController from "../controllers/AdminsController/AdminUpdateController.js";
 import AdminDeleteController from "../controllers/AdminsController/AdminDeleteController.js";
+import TokenAuthenticator from "../middlewares/Validators/TokenAuthenticator.js";
 const router = Router();
 
 // Criar o admin
-router.post("/", AdminCreateValidator, AdminCreateController);
+// Rota protegida para apenas admin_master criar outros admins
+router.post(
+  "/",
+  TokenAuthenticator,
+  AdminCreateValidator,
+  AdminCreateController
+);
 
 // Buscar todos os admins
-router.get("/", AdminGetAllController);
+// Rota protegida apenas para admin_master
+router.get("/", TokenAuthenticator, AdminGetAllController);
 
 // Listar admin por id
-router.get("/:id", ValidatorID, AdminGetOneController);
+// Rota protegida apenas para o admin_master ou para o propio admin que busca seu usuario
+router.get("/:id", TokenAuthenticator, ValidatorID, AdminGetOneController);
 
 // Atualizar admin por id
-router.put("/:id", ValidatorID, AdminUpdateValidator, AdminUpdateController);
+// Rota protegida apenas para o admin_master ou para o propio admin que busca seu usuario
+router.put(
+  "/:id",
+  TokenAuthenticator,
+  ValidatorID,
+  AdminUpdateValidator,
+  AdminUpdateController
+);
 
 // Deletar admin por id
-router.delete("/:id", ValidatorID, AdminDeleteController);
+// Rota protegida apenas para o admin_master ou para o propio admin que busca seu usuario
+router.delete("/:id", TokenAuthenticator, ValidatorID, AdminDeleteController);
 
 export default router;
