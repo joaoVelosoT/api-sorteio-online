@@ -1,6 +1,6 @@
 const UserCreateValidator = (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     if (!name) {
       return res.status(400).json({
@@ -20,6 +20,19 @@ const UserCreateValidator = (req, res, next) => {
       });
     }
 
+    if (role) {
+      const roles = ["common_user", "promoter"];
+
+      if (!roles.includes(roles)) {
+        return res.status(400).json({
+          code: 400,
+          error: {
+            details: `'${role}' não e um role valido`,
+          },
+        });
+      }
+    }
+
     if (!password) {
       return res.status(400).json({
         code: 400,
@@ -33,6 +46,7 @@ const UserCreateValidator = (req, res, next) => {
       name,
       email,
       password,
+      role,
     };
 
     return next();
