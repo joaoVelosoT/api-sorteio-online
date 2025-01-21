@@ -1,10 +1,12 @@
+import Raffle from "../../models/Raffle.js";
 import User from "../../models/User.js";
 
-const RaffleCreateService = async (dataRaffle) => {
+const RaffleCreateService = async (dataRaffle, _idUser) => {
   try {
+    // validar se a pessoa do login eo mesmo do _id do promoter
     // Validar se existe esse userPromoter
     const userPromoter = await User.findOne({
-      _id: dataRaffle.created_by,
+      _id: _idUser,
       role: "promoter",
     });
 
@@ -15,21 +17,21 @@ const RaffleCreateService = async (dataRaffle) => {
           message: "Usuario promoter não encontrado",
         },
       };
+    }
+
+    dataRaffle.created_by = _id;
+
+    const raffle = await Raffle.create(dataRaffle);
+
+    return {
+      code: 201,
+      message: "Sorteio criado com sucesso",
+      raffle,
     };
-
-    
-
-    // name -> validar se ja existe um evento com esse nome
-    // description
-    // start_date -> validar se essa data e realmente no futuro
-    // end_date -> validar se essa data e realmente no futuro
-    // created_by -> validar se e um mongoID
-    // is_active -> validar se e um boolean
-    // max_participants -> validar se não o numero não e negativo
-
-    // validar se o created_by realmente existe
   } catch (error) {
     console.error(error);
     throw new Error(error.message);
   }
 };
+
+export default RaffleCreateService;

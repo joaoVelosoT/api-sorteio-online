@@ -353,6 +353,49 @@
           }
         }
       }
+    },
+    "/raffles": {
+      "post": {
+        "summary": "Cadastro de Sorteios",
+        "description": "Essa rota será responsavel pelo cadastro de novos sorteios",
+        "tags": ["Raffle"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Raffle"
+              },
+              "examples": {
+                "raffle": {
+                  "value": {
+                    "name": "Novo Sorteio",
+                    "description": "descricao",
+                    "start_date": "2024-12-31",
+                    "end_date": "2025-01-31",
+                    "is_active": true,
+                    "max_participants": 20
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Listagem de admins",
+        "description": "Essa rota será responsavel por buscar os admins",
+        "tags": ["Admin"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -381,6 +424,29 @@
             "type": "string"
           },
           "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Raffle": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "end_date": {
+            "type": "string"
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "string"
+          },
+          "max_participants": {
             "type": "string"
           }
         }

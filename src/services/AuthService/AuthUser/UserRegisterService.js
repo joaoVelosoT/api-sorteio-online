@@ -17,10 +17,10 @@ const UserRegisterService = async (dataRegister) => {
     // Fazer login
     const token = await jwt.sign(
       {
-        name: user.name,
-        _id: user._id,
-        email: user.email,
-        isAdmin : false
+        name: user.user.name,
+        _id: user.user._id,
+        email: user.user.email,
+        role: user.user.role,
       },
       process.env.SECRET
     );

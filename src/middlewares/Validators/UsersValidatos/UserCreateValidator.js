@@ -23,7 +23,7 @@ const UserCreateValidator = (req, res, next) => {
     if (role) {
       const roles = ["common_user", "promoter"];
 
-      if (!roles.includes(roles)) {
+      if (!roles.includes(role)) {
         return res.status(400).json({
           code: 400,
           error: {

@@ -33,7 +33,7 @@ const UserLoginService = async (dataUser) => {
         name: user.name,
         email: user.email,
         _id: user._id,
-        isAdmin : false
+        role: user.role,
       },
       process.env.SECRET
     );
