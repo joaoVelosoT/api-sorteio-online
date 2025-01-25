@@ -19,7 +19,7 @@ const RaffleCreateService = async (dataRaffle, _idUser) => {
       };
     }
 
-    dataRaffle.created_by = _id;
+    dataRaffle.created_by = _idUser;
 
     const raffle = await Raffle.create(dataRaffle);
 

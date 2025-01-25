@@ -2,8 +2,8 @@ import RaffleCreateService from "../../services/RaffleService/RaffleCreateServic
 
 const RaffleCreateController = async (req, res) => {
   try {
-    // Validar se o usuario logado e um user_promoter
-    console.log(req.dataAuth);
+    
+    
     if (req.dataAuth.role !== "promoter") {
       return res.status(401).json({
         code: 401,
@@ -12,7 +12,7 @@ const RaffleCreateController = async (req, res) => {
         },
       });
     }
-    // return null;
+    
 
     const raffle = await RaffleCreateService(req.raffle, req.dataAuth._id);
 

@@ -389,7 +389,7 @@
       "get": {
         "summary": "Listagem de admins",
         "description": "Essa rota será responsavel por buscar os admins",
-        "tags": ["Admin"],
+        "tags": ["Raffle"],
         "responses": {
           "200": {
             "description": "OK"
