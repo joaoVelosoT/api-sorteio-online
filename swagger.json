@@ -387,9 +387,43 @@
         }
       },
       "get": {
-        "summary": "Listagem de admins",
-        "description": "Essa rota será responsavel por buscar os admins",
+        "summary": "Listagem de sorteios",
+        "description": "Essa rota será responsavel por buscar os sorteios do usuario",
         "tags": ["Raffle"],
+        "parameters": [
+          {
+            "name": "details",
+            "in": "query",
+            "description": "boolean para receber mais detalhes",
+            "required": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/raffles/{id}": {
+      "get": {
+        "summary": "Listagem de sorteios por id",
+        "description": "Essa rota será responsavel por buscar um sorteio por id",
+        "tags": ["Raffle"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do sorteio para buscar",
+            "required": true
+          },
+          {
+            "name": "details",
+            "in": "query",
+            "description": "boolean para receber mais detalhes",
+            "required": false
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
