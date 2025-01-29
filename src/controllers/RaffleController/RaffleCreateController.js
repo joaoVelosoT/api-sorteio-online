@@ -3,7 +3,6 @@ import RaffleCreateService from "../../services/RaffleService/RaffleCreateServic
 const RaffleCreateController = async (req, res) => {
   try {
     
-    
     if (req.dataAuth.role !== "promoter") {
       return res.status(401).json({
         code: 401,

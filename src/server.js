@@ -13,7 +13,10 @@ import router from "./routers/router.js";
 // const swaggerUI = require("swagger-ui-express");
 import swaggerUI from "swagger-ui-express";
 // const swaggerDocs = require("../swagger.json");
-import swaggerDocs from "../swagger.json" assert { type: "json" };
+
+// pode usar assert ou with para importar o json
+import swaggerDocs from "../swagger.json" with { type : 'json'};
+
 app.use(express.json());
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 app.use("/", router);

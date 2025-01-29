@@ -5,6 +5,8 @@ import TokenAuthenticator from "../middlewares/Validators/TokenAuthenticator.js"
 import RaffleGetAllController from "../controllers/RaffleController/RaffleGetAllController.js";
 import ValidatorID from "../middlewares/Validators/ValidatorID.js";
 import RaffleGetOneController from "../controllers/RaffleController/RaffleGetOneController.js";
+import RaffleUpdateController from "../controllers/RaffleController/RaffleUpdateController.js";
+import RaffleUpdateValidator from "../middlewares/Validators/RaffleValidatos/RaffleUpdateValidator.js";
 const router = Router();
 
 router.post(
@@ -17,5 +19,13 @@ router.post(
 router.get("/", TokenAuthenticator, RaffleGetAllController);
 
 router.get("/:id", TokenAuthenticator, ValidatorID, RaffleGetOneController);
+
+router.put(
+  "/:id",
+  TokenAuthenticator,
+  ValidatorID,
+  RaffleUpdateValidator,
+  RaffleUpdateController
+);
 
 export default router;

@@ -4,6 +4,7 @@ import User from "../../models/User.js";
 const RaffleCreateService = async (dataRaffle, _idUser) => {
   try {
     // validar se a pessoa do login eo mesmo do _id do promoter
+    
     // Validar se existe esse userPromoter
     const userPromoter = await User.findOne({
       _id: _idUser,
