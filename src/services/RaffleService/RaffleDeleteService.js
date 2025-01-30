@@ -1,4 +1,4 @@
-import Raffle from "../../models/Raffle";
+import Raffle from "../../models/Raffle.js";
 
 const RaffleDeleteService = async (dataDelete) => {
   try {
@@ -38,3 +38,5 @@ const RaffleDeleteService = async (dataDelete) => {
     throw new Error(error.message);
   }
 };
+
+export default RaffleDeleteService;

@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 const RaffleCreateValidator = async (req, res, next) => {
   try {
     const {
@@ -9,8 +11,6 @@ const RaffleCreateValidator = async (req, res, next) => {
       max_participants,
     } = req.body;
 
-    // name -> validar se ja existe um evento com esse nome
-    // description
     // start_date -> validar se essa data e realmente no futuro
     // end_date -> validar se essa data e realmente no futuro
     // created_by -> validar se e um mongoID
@@ -41,6 +41,22 @@ const RaffleCreateValidator = async (req, res, next) => {
         code: 400,
         error: {
           details: "O 'start_date' e obrigatorio",
+        },
+      });
+    }
+
+    // Validar se esta data e no futuro
+
+    console.log(start_date);
+    const now = dayjs();
+
+    console.log(dayjs(start_date).isAfter(now));
+    
+    if (!dayjs(start_date).isAfter(now)) {
+      return res.status(400).json({
+        code: 400,
+        error: {
+          details: "A 'start_date' precisa ser futura",
         },
       });
     }

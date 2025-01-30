@@ -17,7 +17,7 @@ const RaffleGetOneService = async (_idRaffle, query) => {
     }
 
     // Validando se solicitaram detalhes
-    if (!details) {
+    if (details !== "true") {
       return {
         code: 200,
         message: "Sorteio encontrado",

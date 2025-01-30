@@ -468,6 +468,24 @@
             "description": "OK"
           }
         }
+      },
+      "delete": {
+        "summary": "Deletar sorteio por id",
+        "description": "Essa rota será responsavel por deletar um sorteio por id",
+        "tags": ["Raffle"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do sorteio para buscar e atualizar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },

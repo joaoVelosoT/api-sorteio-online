@@ -7,6 +7,8 @@ import ValidatorID from "../middlewares/Validators/ValidatorID.js";
 import RaffleGetOneController from "../controllers/RaffleController/RaffleGetOneController.js";
 import RaffleUpdateController from "../controllers/RaffleController/RaffleUpdateController.js";
 import RaffleUpdateValidator from "../middlewares/Validators/RaffleValidatos/RaffleUpdateValidator.js";
+import RaffleDeleteController from "../controllers/RaffleController/RaffleDeleteController.js";
+
 const router = Router();
 
 router.post(
@@ -27,5 +29,7 @@ router.put(
   RaffleUpdateValidator,
   RaffleUpdateController
 );
+
+router.delete("/:id", TokenAuthenticator, ValidatorID, RaffleDeleteController);
 
 export default router;

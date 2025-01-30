@@ -8,8 +8,9 @@ const RaffleGetAllService = async (_idUser, query) => {
 
     // Buscar todas os sorteios
     const raffles = await await Raffle.find({ created_by: _idUser });
+
     // Se o usuario não quiser detalhes, enviar sem detalhes
-    if (!details) {
+    if (details !== "true") {
       return {
         code: 200,
         message: "Todos os sorteios",
@@ -42,7 +43,7 @@ const RaffleGetAllService = async (_idUser, query) => {
     return {
       code: 200,
       message: "Todos os sorteios detalhados",
-      raffles : rafflesDetails,
+      raffles: rafflesDetails,
     };
   } catch (error) {
     console.error(error);
