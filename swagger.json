@@ -429,6 +429,45 @@
             "description": "OK"
           }
         }
+      },
+      "put": {
+        "summary": "Atualizar sorteio por id",
+        "description": "Essa rota será responsavel por atualizar um sorteio por id",
+        "tags": ["Raffle"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Raffle"
+              },
+              "examples": {
+                "raffle": {
+                  "value": {
+                    "name": "Novo Sorteio",
+                    "description": "descricao",
+                    "start_date": "2024-12-31",
+                    "end_date": "2025-01-31",
+                    "is_active": true,
+                    "max_participants": 20
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Id do sorteio para buscar e atualizar",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
       }
     }
   },

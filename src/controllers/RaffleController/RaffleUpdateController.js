@@ -2,8 +2,6 @@ import RaffleUpdateService from "../../services/RaffleService/RaffleUpdateServic
 
 const RaffleUpdateController = async (req, res) => {
   try {
-
-
     const dataUpdate = {
       dataUpdate: req.raffle,
       _idRaffle: req.params.id,
@@ -12,8 +10,8 @@ const RaffleUpdateController = async (req, res) => {
 
     // Validar se quem esta atualizando o sorteio e um usuario promoter, se e um admin, ou se e um admin master
     if (
-      req.dataAuth.role !== "promoter" ||
-      req.dataAuth.role !== "admin" ||
+      req.dataAuth.role !== "promoter" &&
+      req.dataAuth.role !== "admin" &&
       req.dataAuth.role !== "admin_master"
     ) {
       return res.status(401).json({

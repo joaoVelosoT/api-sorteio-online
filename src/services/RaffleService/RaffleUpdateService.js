@@ -3,7 +3,7 @@ import Raffle from "../../models/Raffle.js";
 const RaffleUpdateService = async (dataUpdate) => {
   try {
     // Validar se existe esse sorteio
-    const raffle = await Raffle.findById(_idRaffle);
+    const raffle = await Raffle.findById(dataUpdate._idRaffle);
     if (!raffle) {
       return {
         code: 404,
@@ -14,9 +14,17 @@ const RaffleUpdateService = async (dataUpdate) => {
     }
 
     // Validar se o usuario logado e o criador desse sorteio
+    if(dataUpdate._idUserAuth !== raffle.created_by){
+      return {
+        code : 401,
+        error : {
+          message : "O usuario não pode atualizar os dados de um sorteio de outro usuario"
+        }
+      }
+    }
 
     // Atualizando o projeto
-    await raffle.updateOne(dataRaffle);
+    await raffle.updateOne(dataUpdate.dataUpdate);
 
     return {
       code: 200,
