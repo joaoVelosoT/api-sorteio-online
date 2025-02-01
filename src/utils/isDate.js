@@ -2,9 +2,9 @@ import dayjs from "dayjs";
 
 const isDate = async (date) => {
   try {
-    const date = dayjs(date);
+    const dateFormat = dayjs(date);
 
-    return date.isValid();
+    return dateFormat.isValid();
   } catch (error) {
     console.error(error);
     throw new Error(error.message);

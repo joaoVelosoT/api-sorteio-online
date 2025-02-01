@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import isDate from "../../../utils/isDate.js";
+import dateIsAfter from "../../../utils/dateIsAfter.js";
 
 const RaffleCreateValidator = async (req, res, next) => {
   try {
@@ -45,14 +47,20 @@ const RaffleCreateValidator = async (req, res, next) => {
       });
     }
 
+    // Validar se e realmente uma data
+    const startDateIsValid = await isDate(start_date);
+    if (!startDateIsValid) {
+      return res.status(401).json({
+        code: 400,
+        error: {
+          details: "O 'start_date' precisa ser uma data, no formato yyyy-mm-dd",
+        },
+      });
+    }
+
     // Validar se esta data e no futuro
-
-    console.log(start_date);
-    const now = dayjs();
-
-    console.log(dayjs(start_date).isAfter(now));
-    
-    if (!dayjs(start_date).isAfter(now)) {
+    const startDateIsAfter = await dateIsAfter(null, start_date);
+    if (!startDateIsAfter) {
       return res.status(400).json({
         code: 400,
         error: {
@@ -70,11 +78,35 @@ const RaffleCreateValidator = async (req, res, next) => {
       });
     }
 
-    if (!is_active) {
+    // Validar se e realmente uma data
+    const endDateIsValid = await isDate(end_date);
+    if (!endDateIsValid) {
+      return res.status(401).json({
+        code: 400,
+        error: {
+          details: "O 'end_start' precisa ser uma data, no formato yyyy-mm-dd",
+        },
+      });
+    }
+
+    // Validar se a data final e depois da data de inicio
+    const endDateIsAfter = await dateIsAfter(start_date, end_date);
+    if (!endDateIsAfter) {
       return res.status(400).json({
         code: 400,
         error: {
-          details: "O 'is_active' e obrigatorio",
+          details:
+            "O 'end_start' precisa ser uma data futura do inicio do sorteio",
+        },
+      });
+    }
+
+    // Validar se is_active e um boolean
+    if (typeof is_active !== "boolean") {
+      return res.status(401).json({
+        code: 400,
+        error: {
+          details: "'is_active' é obrigatio e precisa ser um boolean",
         },
       });
     }
@@ -83,7 +115,16 @@ const RaffleCreateValidator = async (req, res, next) => {
       return res.status(400).json({
         code: 400,
         error: {
-          details: "O 'is_active' e obrigatorio",
+          details: "O 'max_participants' e obrigatorio",
+        },
+      });
+    }
+
+    if (max_participants <= 0) {
+      return res.status(400).json({
+        code: 400,
+        error: {
+          details: "O 'max_participants' não pode ser negativo ou 0",
         },
       });
     }
