@@ -115,16 +115,17 @@ const RaffleCreateValidator = async (req, res, next) => {
       return res.status(400).json({
         code: 400,
         error: {
-          details: "O 'max_participants' e obrigatorio",
+          details: "O 'max_participants' e obrigatorio, e não pode ser 0",
         },
       });
     }
 
-    if (max_participants <= 0) {
+    // Validar se o max_participants e negativo
+    if (max_participants < 0) {
       return res.status(400).json({
         code: 400,
         error: {
-          details: "O 'max_participants' não pode ser negativo ou 0",
+          details: "O 'max_participants' não pode ser negativo",
         },
       });
     }
