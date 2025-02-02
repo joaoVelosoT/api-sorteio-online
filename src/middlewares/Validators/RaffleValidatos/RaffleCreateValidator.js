@@ -13,120 +13,105 @@ const RaffleCreateValidator = async (req, res, next) => {
       max_participants,
     } = req.body;
 
-    // start_date -> validar se essa data e realmente no futuro
-    // end_date -> validar se essa data e realmente no futuro
-    // created_by -> validar se e um mongoID
-    // is_active -> validar se e um boolean
-    // max_participants -> validar se não o numero não e negativo
-    // validar se o created_by realmente existe
+    const errors = [];
 
     if (!name) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'name' e obrigatorio",
-        },
+      errors.push({
+        field: "name",
+        message: "O 'name' e obrigatorio",
       });
     }
 
     if (!description) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'description' e obrigatorio",
-        },
+      errors.push({
+        field: "description",
+        message: "O 'description' e obrigatorio",
       });
     }
 
     if (!start_date) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'start_date' e obrigatorio",
-        },
+      errors.push({
+        field: "start_date",
+        message: "O 'start_date' e obrigatorio",
       });
     }
 
-    // Validar se e realmente uma data
-    const startDateIsValid = await isDate(start_date);
-    if (!startDateIsValid) {
-      return res.status(401).json({
-        code: 400,
-        error: {
-          details: "O 'start_date' precisa ser uma data, no formato yyyy-mm-dd",
-        },
-      });
-    }
+    if (start_date) {
+      // Validar se e realmente uma data
+      const startDateIsValid = await isDate(start_date);
+      if (!startDateIsValid) {
+        errors.push({
+          field: "start_date",
+          message: "O 'start_date' precisa ser uma data, no formato yyyy-mm-dd",
+        });
+      }
 
-    // Validar se esta data e no futuro
-    const startDateIsAfter = await dateIsAfter(null, start_date);
-    if (!startDateIsAfter) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "A 'start_date' precisa ser futura",
-        },
-      });
+      // Validar se esta data e no futuro
+      const startDateIsAfter = await dateIsAfter(null, start_date);
+      if (!startDateIsAfter) {
+        errors.push({
+          field: "start_date",
+          message: "'start_date' precisa ser uma data futura",
+        });
+      }
     }
 
     if (!end_date) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'end_date' e obrigatorio",
-        },
+      errors.push({
+        field: "end_date",
+        message: "O 'end_date' e obrigatorio",
       });
     }
 
-    // Validar se e realmente uma data
-    const endDateIsValid = await isDate(end_date);
-    if (!endDateIsValid) {
-      return res.status(401).json({
-        code: 400,
-        error: {
-          details: "O 'end_start' precisa ser uma data, no formato yyyy-mm-dd",
-        },
-      });
-    }
+    if (end_date) {
+      // Validar se e realmente uma data
+      const endDateIsValid = await isDate(end_date);
+      if (!endDateIsValid) {
+        errors.push({
+          field: "end_date",
+          message: "O 'end_start' precisa ser uma data, no formato yyyy-mm-dd",
+        });
+      }
 
-    // Validar se a data final e depois da data de inicio
-    const endDateIsAfter = await dateIsAfter(start_date, end_date);
-    if (!endDateIsAfter) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details:
+      // Validar se a data final e depois da data de inicio
+      const endDateIsAfter = await dateIsAfter(start_date, end_date);
+      if (!endDateIsAfter) {
+        errors.push({
+          field: "end_date",
+          message:
             "O 'end_start' precisa ser uma data futura do inicio do sorteio",
-        },
-      });
+        });
+      }
     }
 
     // Validar se is_active e um boolean
     if (typeof is_active !== "boolean") {
-      return res.status(401).json({
-        code: 400,
-        error: {
-          details: "'is_active' é obrigatio e precisa ser um boolean",
-        },
+      errors.push({
+        field: "is_active",
+        message: "'is_active' é obrigatorio e precisa ser um boolean",
       });
     }
 
     if (!max_participants) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'max_participants' e obrigatorio, e não pode ser 0",
-        },
+      errors.push({
+        field: "max_participants",
+        message: "O 'max_participants' e obrigatorio, e não pode ser 0",
       });
     }
 
     // Validar se o max_participants e negativo
     if (max_participants < 0) {
+      errors.push({
+        field: "max_participants",
+        message: "O 'max_participants' não pode ser negativo",
+      });
+    }
+
+    if (errors.length !== 0) {
       return res.status(400).json({
         code: 400,
-        error: {
-          details: "O 'max_participants' não pode ser negativo",
-        },
+        message: "Tivemos alguns erros de validações",
+        errors,
       });
     }
 
