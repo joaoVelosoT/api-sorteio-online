@@ -2,34 +2,37 @@ const AdminCreateValidator = async (req, res, next) => {
   try {
     const { name, password, role } = req.body;
 
+    const errors = [];
     if (!name) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'name' e obrigatorio",
-        },
+      errors.push({
+        field: "name",
+        message: "O 'name' e obrigatorio",
       });
     }
 
     if (!password) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'password' e obrigatorio",
-        },
+      errors.push({
+        field: "password",
+        message: "O 'password' e obrigatorio",
       });
     }
 
     const roles = ["admin", "admin_master"];
     if (role) {
       if (!roles.includes(role)) {
-        return res.status(400).json({
-          code: 400,
-          error: {
-            details: `'${role}' não e um role válido`,
-          },
+        errors.push({
+          field: "role",
+          message: `'${role}' não e um role válido`,
         });
       }
+    }
+
+    if (errors.length !== 0) {
+      return res.status(400).json({
+        code: 400,
+        message: "Tivemos alguns erros de validações",
+        errors,
+      });
     }
 
     req.admin = {
