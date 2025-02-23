@@ -1,22 +1,28 @@
 const LoginValidator = (req, res, next) => {
   try {
-    const { email, password, registration } = req.body;
+    const { email, password } = req.body;
+
+    const errors = [];
 
     if (!email) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'email' e obrigatorio",
-        },
+      errors.push({
+        field: "email",
+        message: "O 'email' e obrigatorio",
       });
     }
 
     if (!password) {
+      errors.push({
+        field: "password",
+        message: "O 'password' e obrigatorio",
+      });
+    }
+
+    if (errors.length !== 0) {
       return res.status(400).json({
         code: 400,
-        error: {
-          details: "O 'password' e obrigatorio",
-        },
+        message: "Tivemos alguns erros de validações",
+        errors,
       });
     }
 
