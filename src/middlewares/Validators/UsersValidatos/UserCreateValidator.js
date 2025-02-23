@@ -2,21 +2,19 @@ const UserCreateValidator = (req, res, next) => {
   try {
     const { name, email, password, role } = req.body;
 
+    const errors = [];
+
     if (!name) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'name' e obrigatorio",
-        },
+      errors.push({
+        field: "name",
+        message: "O 'name' e obrigatorio",
       });
     }
 
     if (!email) {
-      return res.status(400).json({
-        code: 400,
-        error: {
-          details: "O 'email' e obrigatorio",
-        },
+      errors.push({
+        field: "email",
+        message: "O 'email' e obrigatorio",
       });
     }
 
@@ -24,21 +22,25 @@ const UserCreateValidator = (req, res, next) => {
       const roles = ["common_user", "promoter"];
 
       if (!roles.includes(role)) {
-        return res.status(400).json({
-          code: 400,
-          error: {
-            details: `'${role}' não e um role valido`,
-          },
+        errors.push({
+          field: "role",
+          message: `'${role}' não e um role valido`,
         });
       }
     }
 
     if (!password) {
+      errors.push({
+        field: "password",
+        message: "O 'password' e obrigatorio",
+      });
+    }
+
+    if (errors.length !== 0) {
       return res.status(400).json({
         code: 400,
-        error: {
-          details: "O 'password' e obrigatorio",
-        },
+        message: "Tivemos alguns erros de validações",
+        errors,
       });
     }
 
